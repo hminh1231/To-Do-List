@@ -57,42 +57,66 @@ class TodoList:
             else:
                 print('Ohhhhhh, so sorry but your input is invalid')
                 
-    def option(self):
+    def options(self):
+        '''This function will get user choice input and process it'''
         while True:
             try:
-                user = int(input('So your choice is: '))
+                user = int(input('What is your choice numer: '))
                 if user in range(1,6):
                     break
                 else:
-                    print("Well... Let's try again because you can only choose from 1-5")
+                    print('You must choose option from 1-5')
             except ValueError:
-                print("Okay, don't make this difficult for both of us, your choice is only a number okay, not any strange words or symbols")
-        if user == 1:
-            self.lst_name()
-        elif user == 2:
-            self.add()
-        elif user == 3:
-            self.browse()
-        elif user == 4:
-            self.destroy()
-        else:
-            print("Ukiiii, see you next time my friend and thank you for using me")
-            return False
+                print("It's okay, I know that sometime human can misread too, it's a normal thing that you can't read the part 'What is your choice NUMBER'. Now, let's try again okay. ")
+        return user
+        
+    def keep_going(self):
+        '''This function will decide if the user want to continue or not'''
+        choice = True
+        while choice:
+            working = input('Do you want to continue?(Y/N): ')
+            if working.lower() == 'y':
+                choice = False
+                return True
+            elif working.lower() == 'n':
+                print('Thank you for using me')
+                choice = False
+                return False
+            else:
+                print('Your choice is invalid, please try again')
     
     def display(self):
         self.menu()
-        self.option()
         while True:
-            print("Alright, let's go back, shall we?")
-            using = input('(Y/N): ')
-            if using.lower() == 'y':
-                self.menu2()
-                self.option()
-            elif using.lower() == 'n':
-                print('Alright, thank you for using me, have a good day my friend.')
-                break
+            option = self.options()
+            if option == 1:
+                self.lst_name()
+                if not self.keep_going():
+                    break
+                else:
+                    self.menu2()
+            elif option == 2:
+                self.add()
+                if not self.keep_going():
+                    break
+                else:
+                    self.menu2()
+            elif option == 3:
+                self.browse()
+                if not self.keep_going():
+                    break
+                else:
+                    self.menu2()
+            elif option == 4:
+                self.destroy()
+                if not self.keep_going():
+                    break
+                else:
+                    self.menu2()
             else:
-                print("*sigh* the instruction is clear, only Y or N, what are you doing? Let's try it again.")
+                print('Thank you for using my service')
+                break
+
         
             
 todolst = TodoList()
