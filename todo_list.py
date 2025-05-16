@@ -72,15 +72,12 @@ class TodoList:
         
     def keep_going(self):
         '''This function will decide if the user want to continue or not'''
-        choice = True
-        while choice:
+        while True:
             working = input('Do you want to continue?(Y/N): ')
             if working.lower() == 'y':
-                choice = False
                 return True
             elif working.lower() == 'n':
                 print('Thank you for using me')
-                choice = False
                 return False
             else:
                 print('Your choice is invalid, please try again')
